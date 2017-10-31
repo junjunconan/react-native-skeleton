@@ -1,0 +1,1 @@
+exports.iconSize = 26; 
