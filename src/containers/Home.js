@@ -1,9 +1,12 @@
-import React from 'react';
+// @flow
+
+import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import { connect } from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Config from '../Config';
 
-export default class Home extends React.Component {
+class Home extends Component {
   static navigationOptions = props => {
     const { navigation } = props;
 
@@ -27,11 +30,11 @@ export default class Home extends React.Component {
   };
 
   render() {
-    const { navigation } = this.props;
+    const { navigation, user } = this.props;
 
     return (
       <View style={styles.container}>
-        <Text>Tab 1</Text>
+        <Text>{user.accessToken}</Text>
         <Button
           onPress={() => navigation.navigate('Detail')}
           title='Go to detail'
@@ -40,6 +43,15 @@ export default class Home extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  user: state.user,
+});
+
+const mapDispatchToProps = {
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 const styles = StyleSheet.create({
   container: {

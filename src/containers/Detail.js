@@ -1,11 +1,19 @@
-import React from 'react';
+// @flow
+
+import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { connect } from 'react-redux';
+import * as UserActions from '../actions/user';
 import Config from '../Config';
 
-export default class Detail extends React.Component {
+class Detail extends Component {
   static navigationOptions = {
     title: 'Detail',
   };
+
+  componentDidMount() {
+    this.props.signIn();
+  }
 
   render() {
     return (
@@ -15,6 +23,16 @@ export default class Detail extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  user: state.user,
+});
+
+const mapDispatchToProps = {
+  signIn: UserActions.signIn,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Detail);
 
 const styles = StyleSheet.create({
   container: {
