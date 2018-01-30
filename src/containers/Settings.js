@@ -1,9 +1,13 @@
-import React from 'react';
+// @flow
+
+import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { connect } from 'react-redux';
+import * as UserActions from '../actions/user';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Config from '../Config';
 
-export default class Settings extends React.Component {
+class Settings extends Component {
   static navigationOptions = {
     title: 'Settings',
     tabBarLabel: 'Settings',
@@ -24,6 +28,15 @@ export default class Settings extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  user: state.user,
+});
+
+const mapDispatchToProps = {
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Settings);
 
 const styles = StyleSheet.create({
   container: {

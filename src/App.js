@@ -1,21 +1,20 @@
-import React from 'react';
-import { StackNavigator } from 'react-navigation';
-import Root from './containers/Root';
-import Detail from './containers/Detail';
+// @flow
 
-const App = StackNavigator(
-  {
-    Root: {
-      screen: Root,
-    },
-    Detail: {
-      screen: Detail,
-    }
-  },
-  {
-    initialRouteName: 'Root',
-    headerMode: '',
+import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+
+import configureStore from './store/configureStore';
+import App from './containers';
+
+
+const store = configureStore({});
+
+export default class AppContainer extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <App />
+      </Provider>
+    );
   }
-);
-
-export default App;
+}
